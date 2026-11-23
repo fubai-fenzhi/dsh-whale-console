@@ -1,0 +1,51 @@
+{
+  "name": "dsh-whale-console",
+  "version": "0.2.1",
+  "description": "鲸鱼娘控制台：一键启动/关闭 桌面宠物、本地语音、本地模型（DSH 插件，MIT）",
+  "license": "MIT",
+  "author": "fubai-fenzhi",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "whale",
+    "voice",
+    "desktop-pet"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fubai-fenzhi/dsh-whale-console.git"
+  },
+  "homepage": "https://github.com/fubai-fenzhi/dsh-whale-console",
+  "bugs": {
+    "url": "https://github.com/fubai-fenzhi/dsh-whale-console/issues"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": []
+    }
+  },
+  "os": [
+    "win32"
+  ]
+}
