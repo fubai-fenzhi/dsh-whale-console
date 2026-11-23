@@ -1,0 +1,9 @@
+# dsh-whale-console — 鲸鱼娘控制台
+# config.scriptsDir 必填；powershell / petMatch / ports / scripts 可选。
+- insert:
+    - id: dsh-whale-console
+      name: dsh-whale-console
+      config:
+        scriptsDir: ''
+        # petMatch: surfpet
+        # ports: { voice: 8765, gsv: 9880, llama: 8080, ollama: 11434 }
