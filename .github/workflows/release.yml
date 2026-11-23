@@ -1,13 +1,12 @@
 # Copy to .github/workflows/release.yml in the package repository.
 #
-# Trusted publishing (recommended): configure it once on npmjs.com
-#   package page -> Settings -> Trusted publishing -> GitHub Actions
-#   repository: <owner>/<repo>   workflow filename: release.yml
-# Then a tag push (v1.2.3) publishes without any npm token or OTP.
+# Token publishing (default here):
+#   add a repository secret NPM_TOKEN = granular npm token
+#   (Read and write, Bypass 2FA; never commit it) and push a tag.
 #
-# Without trusted publishing, replace the last step with the commented fallback
-# and store a granular npm token (Read and write, Bypass 2FA) in the NPM_TOKEN
-# repository secret. Never commit that token.
+# Trusted publishing alternative (no token, needs account 2FA on npm):
+#   package page -> Settings -> Trusted publishing -> GitHub Actions
+#   then remove the NODE_AUTH_TOKEN env from the publish step.
 name: release
 
 on:
@@ -18,7 +17,7 @@ on:
 
 permissions:
   contents: read
-  id-token: write # required for trusted publishing and provenance
+  id-token: write # provenance attestation
 
 jobs:
   publish:
@@ -31,8 +30,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+          registry-url: 'https://registry.npmjs.org'
 
-      - name: Use the npm CLI that supports trusted publishing
+      - name: Use the npm CLI that supports provenance
         run: npm install -g npm@latest
 
       - name: Verify the tag matches package.json
@@ -59,9 +59,5 @@ jobs:
 
       - name: Publish with provenance
         run: npm publish --provenance --access public
-
-      # Fallback when trusted publishing is not configured:
-      # - name: Publish with a token
-      #   run: npm publish --provenance --access public
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
