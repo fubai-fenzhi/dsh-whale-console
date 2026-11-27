@@ -1,6 +1,6 @@
 {
   "name": "dsh-whale-console",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "鲸鱼娘控制台：一键启动/关闭 桌面宠物、本地语音、本地模型（DSH 插件，MIT）",
   "license": "MIT",
   "author": "fubai-fenzhi",
